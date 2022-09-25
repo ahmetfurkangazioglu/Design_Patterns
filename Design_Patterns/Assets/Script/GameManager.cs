@@ -4,16 +4,22 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] private ObjectPool objectPool;
+    [SerializeField] private int SpawnInterval;
     void Start()
     {
         AudioManager.Instance.AllMute();
         AudioManager.Instance.AllOpen();
+        StartCoroutine(nameof(SpawnRoutine));
     }
-
-    // Update is called once per frame
-    void Update()
+ 
+    IEnumerator SpawnRoutine()
     {
-        
+        int counter=0;
+        while (true)
+        {
+            objectPool.GetPooledObject(counter++%2);
+            yield return new WaitForSeconds(SpawnInterval);
+        }
     }
 }
