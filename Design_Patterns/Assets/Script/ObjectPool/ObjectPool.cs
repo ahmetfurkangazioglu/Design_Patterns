@@ -15,7 +15,7 @@ public class ObjectPool : MonoBehaviour
     [SerializeField] private Pool[] pools;
 
 
-    private void Start()
+    private void Awake()
     {
         for (int i = 0; i < pools.Length; i++)
         {
